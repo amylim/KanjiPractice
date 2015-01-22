@@ -1,16 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "kanjicharuser";
-$password = "GHZcrVbB8XQBR74pyd2jtQ8a";
-$dbname = "KanjiDB";
+echo("Nothing to do.");
+exit();
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
+include("include/kanjidb_admin_connect.php"); 
 
 mysql_query("SET NAMES utf8");
 $sql = "
@@ -99,11 +91,11 @@ $sql = "
 (30,'先頭','せんとう','first; lead');
 ";
 
-if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+if ($connection->query($sql) === TRUE) {
+    echo "New record created successfully";
 } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $connection->error;
 }
 
-$conn->close();
+$connection->close();
 ?>

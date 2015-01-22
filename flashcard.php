@@ -1,3 +1,4 @@
+<?php include("include/kanjidb_connect.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,27 +27,14 @@ body { overflow:hidden; }
 <div id="debug"></div>
 <div id="wrap">
 <?php
-header('Content-type:text/html; charset=utf-8');
-
-$servername = "localhost";
-$username = "kanjicharuser";
-$password = "GHZcrVbB8XQBR74pyd2jtQ8a";
-$dbname = "KanjiDB";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
 
 $sql = "SELECT COUNT(*) as total_count FROM KanjiCompound";
-$result = $conn->query($sql);
+$result = $connection->query($sql);
 $data = $result->fetch_assoc();
 $kanji_compound_id = mt_rand(1,$data["total_count"]);
 
 $sql = "SELECT * FROM KanjiCompound WHERE rid=".$kanji_compound_id;
-$result = $conn->query($sql);
+$result = $connection->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
@@ -54,7 +42,7 @@ if ($result->num_rows > 0) {
     echo "An error occurred. Try refreshing the page.";
     exit();
 }
-$conn->close();
+$connection->close();
 
 $show_expression_as_question = mt_rand(0,1);
 if($show_expression_as_question) {
