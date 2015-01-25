@@ -43,32 +43,24 @@ if(window.addEventListener) {
         function tool_pencil () {
             var tool = this;
             this.started = false;
-//            this.touchStarted = false;
 
             this.touchstart = function (ev) {
                 context.beginPath();
                 context.moveTo(ev._x, ev._y);
                 tool.touch = true;
-//                tool.touchStarted = true;
-//                document.getElementById("debug").innerText = "Touch started: " + ev._x + ", " + ev._y;
             };
 
             this.touchmove = function (ev) {
-//                if (tool.touchStarted) {
                 if (tool.touch) {
                     context.lineTo(ev._x, ev._y);
                     context.stroke();
-//                    document.getElementById("debug").innerText = "Touch move: " + ev._x + ", " + ev._y;
                 }
             };
 
             this.touchend = function (ev) {
-//                if (tool.touchStarted) {
                 if (tool.touch) {
                     tool.mousemove(ev);
                     tool.touch = false;
-//                    tool.touchStarted = false;
-//                    document.getElementById("debug").innerText = "Touch end: " + ev._x + ", " + ev._y;
                 }
             };
 
@@ -78,7 +70,6 @@ if(window.addEventListener) {
                 context.beginPath();
                 context.moveTo(ev._x, ev._y);
                 tool.started = true;
-//                document.getElementById("debug").innerText = "Mouse down";
             };
 
             // This function is called every time you move the mouse. Obviously, it only 
@@ -88,7 +79,6 @@ if(window.addEventListener) {
                 if (tool.started) {
                     context.lineTo(ev._x, ev._y);
                     context.stroke();
-//                    document.getElementById("debug").innerText = "Mouse move";
                 }
             };
 
@@ -97,7 +87,6 @@ if(window.addEventListener) {
                 if (tool.started) {
                     tool.mousemove(ev);
                     tool.started = false;
-//                    document.getElementById("debug").innerText = "Mouse up";
                 }
             };
         }
@@ -108,13 +97,11 @@ if(window.addEventListener) {
             if (ev.layerX || ev.layerX == 0) { // Firefox
                 ev._x = ev.layerX;
                 ev._y = ev.layerY;
-//                    document.getElementById("debug").innerText = "boo f";
             } else if (ev.offsetX || ev.offsetX == 0) { // Opera
                 ev._x = ev.offsetX;
                 ev._y = ev.offsetY;
-//                    document.getElementById("debug").innerText = "boo o";
             } 
-            document.getElementById("debug").innerText = "body height: " + window.innerHeight + ", canvas height: " + canvas.height;
+//            document.getElementById("debug").innerText = "body height: " + window.innerHeight + ", canvas height: " + canvas.height;
 
             // Call the event handler of the tool.
             var func = tool[ev.type];
@@ -127,9 +114,8 @@ if(window.addEventListener) {
             if (ev.touches.item(0).pageX || ev.touches.item(0).pageX == 0) {
                 ev._x = ev.touches.item(0).pageX - canvas.getBoundingClientRect().left;
                 ev._y = ev.touches.item(0).pageY - canvas.getBoundingClientRect().top; 
-//                    document.getElementById("debug").innerText = "boo";
             }
-            document.getElementById("debug").innerText = "body height: " + window.innerHeight + ", canvas height: " + canvas.height;
+//            document.getElementById("debug").innerText = "body height: " + window.innerHeight + ", canvas height: " + canvas.height;
 
             // Call the event handler of the tool.
             var func = tool[ev.type];
