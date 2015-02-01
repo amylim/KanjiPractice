@@ -9,24 +9,6 @@ table, th, td {
 }
 </style>
 <h3>Kanji List</h3>
-<!--<table>
-    <tr>
-        <td>
-            <div id='kanji_list_menu'>
-                <a href='kanji_list.php'>All</a><br>
-                <a href='kanji_list.php?from=1&to=30'>Kanji Set #1-30</a><br>
-                <a href='kanji_list.php?from=31&to=40'>Kanji Set #31-40</a><br>
-            </div>
-        </td>
-        <td>
-            <div id='kanji_character_list'></div>
-        </td>
-        <td>
-            <div id='kanji_info'></div>
-        </td>
-    </tr>
-</table>-->
-
 <div id='kanji_list_menu' style='float:left; width:15%;'>
     <a href='kanji_list.php'>All</a><br>
     <a href='kanji_list.php?from=1&to=30'>Kanji Set #1-30</a><br>
@@ -67,10 +49,9 @@ if ($g_from > $g_to) {
             $id += 1;
         }
         $html_kanji_character_list .= "</tr></table>";
-        echo($html_kanji_character_list);
 
         $stmt->close();
-        echo("<script>document.getElementById('kanji_character_list').innerHTML = '" . $html_kanji_character_list . "';</script>");
+        echo("<script>document.getElementById('kanji_character_list').innerHTML = \"" . $html_kanji_character_list . "\";</script>");
     }
 
     // Display the Kanji information
