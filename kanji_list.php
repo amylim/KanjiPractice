@@ -8,19 +8,44 @@ table, th, td {
     padding: 5px;
 }
 </style>
+<h3>Kanji List</h3>
+<!--<table>
+    <tr>
+        <td>
+            <div id='kanji_list_menu'>
+                <a href='kanji_list.php'>All</a><br>
+                <a href='kanji_list.php?from=1&to=30'>Kanji Set #1-30</a><br>
+                <a href='kanji_list.php?from=31&to=40'>Kanji Set #31-40</a><br>
+            </div>
+        </td>
+        <td>
+            <div id='kanji_character_list'></div>
+        </td>
+        <td>
+            <div id='kanji_info'></div>
+        </td>
+    </tr>
+</table>-->
+
+<div id='kanji_list_menu' style='float:left; width:15%;'>
+    <a href='kanji_list.php'>All</a><br>
+    <a href='kanji_list.php?from=1&to=30'>Kanji Set #1-30</a><br>
+    <a href='kanji_list.php?from=31&to=40'>Kanji Set #31-40</a><br>
+</div>
+<div id='kanji_info' style='float:right; width:50%;'></div>
+<div id='kanji_character_list' style='width:35%;'></div>
+
 <?php
-
-echo("<h3>Kanji List</h3>");
-
 $g_from = $_GET["from"];
 $g_to = $_GET["to"];
 $g_kanji = $_GET["kanji"];
 
-if(!($g_from && $g_to) && !$g_kanji) {
-    $g_from = '1';
-    $g_to = '30';
-    // TODO: Display different page for no GET parameters
-} else if ($g_from > $g_to) {
+if (!($g_from && $g_to) && !$g_kanji) {
+    $g_from = '31';
+    $g_to = '40';
+} 
+
+if ($g_from > $g_to) {
     die("Invalid parameters");
 } else if ($g_from && $g_to) {
     // Display the Kanji table
@@ -30,39 +55,44 @@ if(!($g_from && $g_to) && !$g_kanji) {
 
         $stmt->bind_result($kanji);
 
-        echo("<table><tr>");
+        $html_kanji_character_list = "<table><tr>";
         $id = (int)$g_from;
         $count = 0;
         while ($stmt->fetch()) {
-            echo("<td><a href='kanji_list.php?kanji=" . $id . "'>" . $kanji . "</a></td>");
+            $html_kanji_character_list .= "<td><a href='kanji_list.php?from=" . $g_from . "&to=" . $g_to . "&kanji=" . $id . "'>" . $kanji . "</a></td>";
             if($count%5 == 4 && $count != ($g_to - $g_from)) {
-                echo("</tr><tr>");
+                $html_kanji_character_list .= "</tr><tr>";
             }
             $count += 1;
             $id += 1;
         }
-        echo("</tr></table>");
+        $html_kanji_character_list .= "</tr></table>";
+        echo($html_kanji_character_list);
 
         $stmt->close();
+        echo("<script>document.getElementById('kanji_character_list').innerHTML = '" . $html_kanji_character_list . "';</script>");
     }
-} else if ($g_kanji) {
+
     // Display the Kanji information
-    if($stmt = $connection->prepare('SELECT expression, reading, meaning FROM KanjiCompound WHERE related_kanji=?')) {
-        $stmt->bind_param('i', $g_kanji);
-        $stmt->execute();
+    if ($g_kanji) {
+        if($stmt = $connection->prepare('SELECT expression, reading, meaning FROM KanjiCompound WHERE related_kanji=?')) {
+            $stmt->bind_param('i', $g_kanji);
+            $stmt->execute();
 
-        $stmt->bind_result($expression, $reading, $meaning);
+            $stmt->bind_result($expression, $reading, $meaning);
 
-        echo("<table>");
-        while ($stmt->fetch()) {
-            echo("<tr><td>" . $expression . "</td><td>" . $reading . "</td><td>" . $meaning . "</td></tr>");
+            $html_kanji_info = "<table>";
+            while ($stmt->fetch()) {
+                $html_kanji_info .= "<tr><td>" . $expression . "</td><td>" . $reading . "</td><td>" . $meaning . "</td></tr>";
+            }
+            $html_kanji_info .= "</table>";
+
+            $stmt->close();
+            echo("<script>document.getElementById('kanji_info').innerHTML = '" . $html_kanji_info . "'</script>");
         }
-        echo("</table>");
+    } 
+}     
 
-        $stmt->close();
-    }
-}
-    
 $connection->close();
 
 ?>
