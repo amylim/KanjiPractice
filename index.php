@@ -30,7 +30,7 @@ margin: 0 15px;
 <table align="center">
     <tr>
         <td>
-            <a id="ex3" href="flashcard.php"><img src='image/pencil.png'/>Practice</a>
+            <a id="ex3" href="practice.php"><img src='image/pencil.png'/>Practice</a>
         </td>
     </tr>
     <tr>
