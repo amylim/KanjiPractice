@@ -35,7 +35,7 @@ margin: 0 15px;
     </tr>
     <tr>
         <td>
-            <a id="ex3" href="studylist/index.php"><img src='image/note.png'/>Kanji List</a>
+            <a id="ex3" href="studylist/index.php"><img src='image/note.png'/>Vocabulary</a>
         </td>
     </tr>
     <tr>
