@@ -1,4 +1,4 @@
-<?php include("include/kanjidb_connect.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/include/kanjidb_connect.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

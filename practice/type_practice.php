@@ -1,4 +1,4 @@
-<?php include("include/kanjidb_connect.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/include/kanjidb_connect.php"); ?>
 <script type="text/javascript">
 function Term(jap, sound, eng) {
     this.lang = jap;

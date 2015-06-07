@@ -30,12 +30,12 @@ margin: 0 15px;
 <table align="center">
     <tr>
         <td>
-            <a id="ex3" href="practice.php"><img src='image/pencil.png'/>Practice</a>
+            <a id="ex3" href="practice/index.php"><img src='image/pencil.png'/>Practice</a>
         </td>
     </tr>
     <tr>
         <td>
-            <a id="ex3" href="kanji_list.php"><img src='image/note.png'/>Kanji List</a>
+            <a id="ex3" href="studylist/index.php"><img src='image/note.png'/>Kanji List</a>
         </td>
     </tr>
     <tr>
