@@ -6,7 +6,7 @@ include("include/kanjidb_admin_connect.php");
 
 mysql_query("SET NAMES utf8");
 
-// change quere here
+// change query here
 
 // KanjiCharacter
 //$sql = "
@@ -15,18 +15,28 @@ mysql_query("SET NAMES utf8");
 //    (31,'夢'),
 //(40,'良');
 //";
-$sql = "
-    INSERT INTO KanjiCompound (related_kanji, expression, reading, meaning)
-    VALUES
-    (31,'夢','ゆめ','dream'),
-(40,'不良','ふりょう','delinquent');
 
-    ";
+//$sql = "
+//    INSERT INTO KanjiCompound (related_kanji, expression, reading, meaning)
+//    VALUES
+//    (31,'夢','ゆめ','dream'),
+//(40,'不良','ふりょう','delinquent');
+//
+//    ";
+
 //$sql = "
 //    UPDATE KanjiCompound 
 //    SET meaning='forest'
 //    WHERE RID=68;
 //";
+
+
+//$sql = "
+//    INSERT INTO KanjiCompound (related_kanji, expression, reading, meaning)
+//    VALUES
+//    (31,'夢','ゆめ','dream'),
+//(40,'不良','ふりょう','delinquent');
+//    ";
 
 if ($connection->query($sql) === TRUE) {
     echo "New record created successfully";
