@@ -6,15 +6,22 @@ $output = "";
 
 $f_input_arr = explode("\n", $f_input);
 foreach($f_input_arr as $each_input) {
-    $sql = "SELECT word_japanese, word_furigana, word_english FROM iKnow WHERE word_japanese='" . trim($each_input) . "'";
+    $each_input = trim($each_input);
+    $sql = "SELECT word_japanese, word_furigana, word_english FROM iKnow WHERE word_japanese='$each_input'";
     if($stmt = $connection->prepare($sql)) {
         $stmt->execute();
         $stmt->bind_result($word_japanese, $word_furigana, $word_english);
 
+        $empty_result = true;
         while ($stmt->fetch()) {
             $output .= $word_japanese . "\t" . $word_furigana . "\t" . $word_english . "\n";
+            $empty_result = false;
         }
         $stmt->close();
+
+        if($empty_result) {
+            $output .= $each_input . "\n";
+        }
     }
 }
 $connection->close();
